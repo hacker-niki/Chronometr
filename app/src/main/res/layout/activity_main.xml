@@ -4,59 +4,51 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".MainActivity"
-    android:background="#e1e2e1">
-    <ImageButton
-        android:id="@+id/buttonPause"
-        android:layout_width="100px"
-        android:layout_height="100px"
-        android:scaleType="centerInside"
-        android:src="@drawable/play"
-        android:background="#0000"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toStartOf="@id/buttonStop"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/chronometer"
-        android:layout_marginStart="100dp"
-        android:visibility="gone"
-        />
-    <ImageButton
-        android:id="@+id/buttonStop"
-        android:layout_width="100px"
-        android:layout_height="100px"
-        android:scaleType="centerInside"
-        android:src="@drawable/stop"
-        android:background="#0000"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toEndOf="@id/buttonPause"
-        app:layout_constraintTop_toBottomOf="@+id/chronometer"
-        android:layout_marginEnd="100dp"
-        android:visibility="gone"
-        />
-    <ImageButton
-        android:id="@+id/buttonPlay"
-        android:layout_width="100px"
-        android:layout_height="100px"
-        android:scaleType="centerInside"
-        android:src="@drawable/pause"
-        android:background="#0000"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/chronometer"
-        />
-    <Chronometer
+    android:background="#e1e2e1"
+    tools:context=".MainActivity">
+
+    <LinearLayout
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_marginBottom="100dp"
+        android:orientation="horizontal"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
+        app:iconTint="#2283F6">
+
+
+        <com.google.android.material.floatingactionbutton.ExtendedFloatingActionButton
+            android:id="@+id/eFAb_play_pause"
+            android:layout_width="100dp"
+            android:layout_height="100dp"
+            android:layout_margin="10dp"
+            android:backgroundTint="@color/white"
+            app:icon="@drawable/pause"
+            app:iconTint="#2283F6"/>
+
+        <com.google.android.material.floatingactionbutton.ExtendedFloatingActionButton
+            android:layout_width="100dp"
+            android:layout_height="100dp"
+            android:layout_margin="10dp"
+            android:backgroundTint="@color/white"
+            android:visibility="gone"
+            android:id="@+id/eFab_stop"
+            app:icon="@drawable/stop"
+            app:iconTint="#2283F6"/>
+
+    </LinearLayout>
+
+    <Chronometer
+        android:id="@+id/chronometer"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
         android:layout_marginBottom="300dp"
+        android:format="%s"
         android:textSize="60sp"
         android:typeface="monospace"
-        android:format="%s"
-        android:id="@+id/chronometer"
-        />
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
 </androidx.constraintlayout.widget.ConstraintLayout>

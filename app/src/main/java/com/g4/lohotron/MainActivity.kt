@@ -1,54 +1,44 @@
 package com.g4.lohotron
 
-import android.media.Image
-import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.os.SystemClock
 import android.widget.Chronometer
-import android.widget.ImageButton
-import android.widget.Toast
+import androidx.appcompat.app.AppCompatActivity
 import androidx.core.view.isVisible
+import com.google.android.material.floatingactionbutton.ExtendedFloatingActionButton
 
 class MainActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
+        var timeWhenStop : Long = 0
+        var isWorkNow = false
         val chronometer: Chronometer = findViewById(R.id.chronometer)
-        var onWork : Boolean = false
-        val buttonPlay: ImageButton = findViewById(R.id.buttonPlay)
-        val buttonPause : ImageButton = findViewById(R.id.buttonPause)
-        val buttonStop : ImageButton = findViewById(R.id.buttonStop)
+        val buttonPlayPause: ExtendedFloatingActionButton = findViewById(R.id.eFAb_play_pause)
+        val buttonStop : ExtendedFloatingActionButton = findViewById(R.id.eFab_stop)
 
-        buttonPlay.setOnClickListener{
+        buttonPlayPause.setOnClickListener{
+            if(!isWorkNow){
+                chronometer.base = SystemClock.elapsedRealtime() + timeWhenStop;
+                chronometer.start();
+                buttonStop.isVisible = true
+                isWorkNow = true
+                buttonPlayPause.setIconResource(R.drawable.play)
+            } else{
 
-            chronometer.start()
-            onWork = true
-            buttonPause.isVisible = true
-            buttonStop.isVisible = true
-            buttonPlay.isVisible = false
-
+                chronometer.stop()
+                timeWhenStop = chronometer.base - SystemClock.elapsedRealtime()
+                buttonPlayPause.setIconResource(R.drawable.pause)
+                isWorkNow = false
+            }
         }
 
-        buttonPause.setOnClickListener{
-
+        buttonStop.setOnClickListener{
             chronometer.stop()
-            onWork = false
-            buttonPause.isVisible = false
-            buttonPlay.isVisible = true
-
-        }
-
-        buttonStop.setOnClickListener(){
-
-            chronometer.base = SystemClock.elapsedRealtime()
-            buttonPause.isVisible = false
-            buttonPlay.isVisible = true
+            timeWhenStop = 0
             buttonStop.isVisible = false
-            chronometer.stop()
-            onWork = false
-
+            buttonPlayPause.setIconResource(R.drawable.pause)
+            isWorkNow = false
         }
-
-
     }
 }
