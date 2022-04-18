@@ -12,24 +12,24 @@ class MainActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
         var timeWhenStop : Long = 0
-        var isWorkNow = false
+        var isWorking = false
         val chronometer: Chronometer = findViewById(R.id.chronometer)
         val buttonPlayPause: ExtendedFloatingActionButton = findViewById(R.id.eFAb_play_pause)
         val buttonStop : ExtendedFloatingActionButton = findViewById(R.id.eFab_stop)
 
         buttonPlayPause.setOnClickListener{
-            if(!isWorkNow){
+            if(!isWorking){
                 chronometer.base = SystemClock.elapsedRealtime() + timeWhenStop;
                 chronometer.start();
                 buttonStop.isVisible = true
-                isWorkNow = true
+                isWorking = true
                 buttonPlayPause.setIconResource(R.drawable.play)
             } else{
 
                 chronometer.stop()
                 timeWhenStop = chronometer.base - SystemClock.elapsedRealtime()
                 buttonPlayPause.setIconResource(R.drawable.pause)
-                isWorkNow = false
+                isWorking = false
             }
         }
 
@@ -38,7 +38,7 @@ class MainActivity : AppCompatActivity() {
             timeWhenStop = 0
             buttonStop.isVisible = false
             buttonPlayPause.setIconResource(R.drawable.pause)
-            isWorkNow = false
+            isWorking = false
         }
     }
 }
