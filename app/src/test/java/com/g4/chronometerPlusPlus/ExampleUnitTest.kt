@@ -1,4 +1,4 @@
-package com.g4.lohotron
+package com.g4.chronometerPlusPlus
 
 import org.junit.Test
 
